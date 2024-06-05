@@ -8,10 +8,23 @@ contract SimpleStorage {
     // bytes32 are strings in hex coding, bytes and bytes32 are not same
     
     // visibilty : internal or public or private or external
-    uint256 public favoriteNumber; // default value 0; boolean has 'false';
+    uint256 myFavoriteNumber; // default value 0; boolean has 'false';
+
+    // uint256[] listOfFavoriteNumbers; // [x,y,z]
+    struct Person{
+        uint256 favoriteNumber;
+        string name;
+    }
+
+    // Person public matt = Person(13,"Matt");
+    // Person public matt = Person({favoriteNumber: 13, name: "Matt"});
+    // MAKE ARRAYS OF OBJECTS FOR STRUCTURE TO SOLVE REPEATED TASKS
+
+    Person[] public listOfPeople; // dynamic array
+    // Person[3] public listOfThreePeople; // static array
 
     function store(uint256 _favoriteNumber) public {
-        favoriteNumber = _favoriteNumber;
+        myFavoriteNumber = _favoriteNumber;
         // uint256 testVar = 6;
         // Scope of local variables stays local
         // retrieve(); costs more gas
@@ -19,13 +32,30 @@ contract SimpleStorage {
 
     // keywords: view: equivalent to 'const' , pure: allows changing state
     function retrieve() public view returns(uint256) {
-        return favoriteNumber;
+        return myFavoriteNumber;
     }
     /* 
         function retrieve() public pure  returns(uint256) {
             return 7;
         } 
     */
+    
+    // Mappings - avoiding loops for arrays; Default value is ZERO (acc to type mentioned)
+    mapping(string => uint256) public nameToFavoriteNumber;
 
-    // Smart contract address on chain: 0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B
+    // DATA ALLOCATION : STACK, MEMORY, STORAGE, CALLDATA, CODE, LOGS
+    // CALLDATA & MEMORY: temporary allocated data, on RAM; MEMORY variable can be changed, CALLDATA variable is like const
+    // STORAGE: Permanent Variables, can't be modified, on Storage Disk
+    
+    // not to be used for non-primitive types like uint, but for arrays, structs or mappings
+    function addPerson(string memory _name, uint256 _favoriteNumber) public {
+        // Person memory newPerson = Person(_favoriteNumber,_name);
+        // listOfPeople.push(newPerson);
+        // OR
+        listOfPeople.push(Person(_favoriteNumber,_name));
+        
+        nameToFavoriteNumber[_name] = _favoriteNumber;
+    }
+
+    // Smart contract address on chain (eg): 0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B
 }
