@@ -84,3 +84,13 @@ $ cast --help
 - r, s, v == private key signature, helps to sign the transaction
 #### Nonce
 - Important to figure out the transaction numbers for unique transactions
+
+## ALCHEMY
+- for deploying dapps either on testnet or mainnet
+
+### SUPERNODE
+- Ethereum and EVM compatible API
+- Load balancer
+
+### Mempool
+- "a list of pending transactions waiting for validation from a node before it is committed to a block on the blockchain." - Alchemy, Mempool docs
