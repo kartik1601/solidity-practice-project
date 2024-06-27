@@ -1,6 +1,10 @@
 // SPDX License Identifier: MIT
 pragma solidity ^0.8.18;
 
+// DONT USE ENV
+// USE: cast wallet import "nameOfTheKey" --interactive
+// npx thirdweb deploy
+
 import {Script} from "forge-std/Script.sol";
 import {SimpleStorage} from "../src/SimpleStorage.sol";
 
